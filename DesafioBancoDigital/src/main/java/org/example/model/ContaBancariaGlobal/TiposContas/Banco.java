@@ -1,10 +1,12 @@
 package org.example.model.ContaBancariaGlobal.TiposContas;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Banco {
     private String nome;
     private String agencia;
+    private List<Conta> contas;
 
     public Banco(String nome, String agencia) {
         this.nome = nome;
@@ -26,16 +28,32 @@ public class Banco {
         this.agencia = agencia;
     }
 
+    public String getAgencia() {
+        return agencia;
+    }
+
+    public void setAgencia(String agencia) {
+        this.agencia = agencia;
+    }
+
+    public List<Conta> getContas() {
+        return contas;
+    }
+
+    public void setContas(List<Conta> contas) {
+        this.contas = contas;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Banco banco = (Banco) o;
-        return Objects.equals(nome, banco.nome) && Objects.equals(agencia, banco.agencia);
+        return Objects.equals(nome, banco.nome) && Objects.equals(agencia, banco.agencia) && Objects.equals(contas, banco.contas);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nome, agencia);
+        return Objects.hash(nome, agencia, contas);
     }
 
     @Override
@@ -43,6 +61,7 @@ public class Banco {
         return "Banco{" +
                 "nome='" + nome + '\'' +
                 ", agencia='" + agencia + '\'' +
+                ", contas=" + contas +
                 '}';
     }
 }
