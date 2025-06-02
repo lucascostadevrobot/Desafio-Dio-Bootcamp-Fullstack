@@ -3,6 +3,7 @@ package org.example.model.Cliente;
 import org.example.model.ContaBancariaGlobal.Cartoes.Cartao;
 import org.example.model.ContaBancariaGlobal.TiposContas.Conta;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Clientes {
@@ -10,13 +11,13 @@ public class Clientes {
     private String sobreNome;
     private String cpf;
     Conta conta;
-    Cartao cartao;
+    List<Cartao> cartao;
 
-    public Clientes(String nome, String sobreNome, Conta conta, String cpf, Cartao cartao) {
+    public Clientes(String nome, String sobreNome, String cpf, Conta conta, List<Cartao> cartao) {
         this.nome = nome;
         this.sobreNome = sobreNome;
-        this.conta = conta;
         this.cpf = cpf;
+        this.conta = conta;
         this.cartao = cartao;
     }
 
@@ -55,11 +56,12 @@ public class Clientes {
         this.conta = conta;
     }
 
-    public Cartao getCartao() {
+
+    public List<Cartao> getCartao() {
         return cartao;
     }
 
-    public void setCartao(Cartao cartao) {
+    public void setCartao(List<Cartao> cartao) {
         this.cartao = cartao;
     }
 

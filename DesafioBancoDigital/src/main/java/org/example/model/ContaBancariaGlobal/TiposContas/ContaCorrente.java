@@ -1,20 +1,41 @@
 package org.example.model.ContaBancariaGlobal.TiposContas;
 
 import org.example.enums.TipoPagamento;
+import org.example.model.Cliente.Clientes;
 import org.example.model.ContaBancariaGlobal.Cartoes.Cartao;
 
-import java.util.Objects;
+import java.util.List;
 
 
 public class ContaCorrente extends Conta {
-    private TipoPagamento tipoPagamento;
-    Cartao cartao;
+    Clientes clientes;
+    Conta conta;
+    TipoPagamento tipoPagamento;
 
-
-    public ContaCorrente(Integer numeroConta, Integer saldoConta, Integer agenciaConta, String titularConta, TipoPagamento tipoPagamento, Cartao cartao) {
-        super(numeroConta, saldoConta, agenciaConta, titularConta);
+    public ContaCorrente(Integer numeroConta, Integer saldoConta, String titularConta, Clientes clientes, Cartao cartao,  Conta conta, TipoPagamento tipoPagamento) {
+        super(numeroConta, saldoConta, titularConta, clientes, cartao);
+        this.conta = conta;
         this.tipoPagamento = tipoPagamento;
-        this.cartao = cartao;
+    }
+
+
+    @Override
+    public Clientes getClientes() {
+        return clientes;
+    }
+
+    @Override
+    public void setClientes(Clientes clientes) {
+        this.clientes = clientes;
+    }
+
+
+    public Conta getConta() {
+        return conta;
+    }
+
+    public void setConta(Conta conta) {
+        this.conta = conta;
     }
 
     public TipoPagamento getTipoPagamento() {
@@ -23,34 +44,5 @@ public class ContaCorrente extends Conta {
 
     public void setTipoPagamento(TipoPagamento tipoPagamento) {
         this.tipoPagamento = tipoPagamento;
-    }
-
-    public Cartao getCartao() {
-        return cartao;
-    }
-
-    public void setCartao(Cartao cartao) {
-        this.cartao = cartao;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        ContaCorrente that = (ContaCorrente) o;
-        return tipoPagamento == that.tipoPagamento && Objects.equals(cartao, that.cartao);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), tipoPagamento, cartao);
-    }
-
-    @Override
-    public String toString() {
-        return "ContaCorrente{" +
-                "tipoPagamento=" + tipoPagamento +
-                ", cartao=" + cartao +
-                '}';
     }
 }
