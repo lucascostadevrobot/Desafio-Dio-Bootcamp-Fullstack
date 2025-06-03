@@ -26,7 +26,10 @@ public class PedidoTest {
     @Test
     void deveVerificaTipoDePedido() {
 
-        /*Verifica o tipo de Pagamento Debito*/
+        /**
+         * Roteiro do teste:
+         * Inicializa o ciclo de testes para o Tipo de Pagamento via Cartão de Débito
+         * */
         {
 
             //Insntacia Conta Corrente...
@@ -53,6 +56,53 @@ public class PedidoTest {
 
         {
 
+            //Insntacia Conta Corrente...
+            ContaCorrente contaCorrente = new ContaCorrente(
+                    TipoPagamento.CARTAO_DEBITO,
+                    List.of(criaCartoes()));
+            contaCorrente.setSaldoConta(200);
+
+            //Instancia PedidoCliente para não dar PointerNullExpecption..
+            PedidoCliente pedidoCliente = new PedidoCliente();
+            pedidoCliente.setValorCompra(100);
+            pedidoCliente.setTipoPagamento(TipoPagamento.CARTAO_DEBITO);
+            pedidoCliente.setContaOrigem(contaCorrente);
+
+            //Instancia PedidoService...
+            PedidoService pedidoService = new PedidoService();
+            pedidoService.Processarpedido(pedidoCliente);
+
+            //Espero que seja cartão de debito, compara com o tipo da conta corrente...
+            Assertions.assertEquals(TipoPagamento.CARTAO_DEBITO, contaCorrente.getTipoPagamento());
+            //Espera que a conta tenha saldo 0, uma vez que o valor da compra foi 200
+            Assertions.assertEquals(100, pedidoCliente.getContaOrigem().getSaldoConta());
+        }
+
+        /**
+         * Roteiro do teste:
+         * Inicializa o ciclo de testes para o Tipo de Pagamento via Pix
+         * */
+        {
+            //Insntacia Conta Corrente...
+            ContaCorrente contaCorrente = new ContaCorrente(
+                    TipoPagamento.PIX,
+                    List.of(criaCartoes()));
+            contaCorrente.setSaldoConta(200);
+
+            //Instancia PedidoCliente...
+            PedidoCliente pedidoCliente = new PedidoCliente();
+            pedidoCliente.setValorCompra(200);
+            pedidoCliente.setTipoPagamento(TipoPagamento.PIX);
+            pedidoCliente.setContaOrigem(contaCorrente);
+
+            //Instancia PedidoService...
+            PedidoService pedidoService = new PedidoService();
+            pedidoService.Processarpedido(pedidoCliente);
+
+            //Espero que seja cartão de debito, compara com o tipo da conta corrente...
+            Assertions.assertEquals(TipoPagamento.PIX, contaCorrente.getTipoPagamento());
+            //Espera que a conta tenha saldo 0, uma vez que o valor da compra foi 200
+            Assertions.assertEquals(0, pedidoCliente.getContaOrigem().getSaldoConta());
         }
 
     }
