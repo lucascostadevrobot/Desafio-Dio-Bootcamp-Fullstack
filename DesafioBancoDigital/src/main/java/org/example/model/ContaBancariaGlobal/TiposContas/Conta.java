@@ -1,24 +1,21 @@
 package org.example.model.ContaBancariaGlobal.TiposContas;
 
-import org.example.model.Cliente.Clientes;
 import org.example.model.ContaBancariaGlobal.Cartoes.Cartao;
 
-import javax.swing.*;
+import java.util.List;
 import java.util.Objects;
 
-public class Conta extends Banco{
+public class Conta extends Banco {
     private Integer numeroConta;
     private Integer saldoConta;
     private String titularConta;
-    private Clientes clientes;
-    Cartao cartao;
+    List<Cartao> cartaoList;
 
-    public Conta(Integer numeroConta, Integer saldoConta, String titularConta, Clientes clientes, Cartao cartao) {
+    public Conta(Integer numeroConta, Integer saldoConta, String titularConta, List<Cartao> cartaoList) {
         this.numeroConta = numeroConta;
         this.saldoConta = saldoConta;
         this.titularConta = titularConta;
-        this.clientes = clientes;
-        this.cartao = cartao;
+        this.cartaoList = cartaoList;
     }
 
     public Conta() {
@@ -50,33 +47,25 @@ public class Conta extends Banco{
         this.titularConta = titularConta;
     }
 
-
-    public Clientes getClientes() {
-        return clientes;
+    public List<Cartao> getCartaoList() {
+        return cartaoList;
     }
 
-    public void setClientes(Clientes clientes) {
-        this.clientes = clientes;
-    }
-
-    public Cartao getCartao() {
-        return cartao;
-    }
-
-    public void setCartao(Cartao cartao) {
-        this.cartao = cartao;
+    public void setCartaoList(List<Cartao> cartaoList) {
+        this.cartaoList = cartaoList;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
         Conta conta = (Conta) o;
-        return Objects.equals(numeroConta, conta.numeroConta) && Objects.equals(saldoConta, conta.saldoConta)  && Objects.equals(titularConta, conta.titularConta)  && Objects.equals(clientes, conta.clientes) && Objects.equals(cartao, conta.cartao);
+        return Objects.equals(numeroConta, conta.numeroConta) && Objects.equals(saldoConta, conta.saldoConta) && Objects.equals(titularConta, conta.titularConta) && Objects.equals(cartaoList, conta.cartaoList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numeroConta, saldoConta, titularConta,  clientes, cartao);
+        return Objects.hash(super.hashCode(), numeroConta, saldoConta, titularConta, cartaoList);
     }
 
     @Override
@@ -85,29 +74,14 @@ public class Conta extends Banco{
                 "numeroConta=" + numeroConta +
                 ", saldoConta=" + saldoConta +
                 ", titularConta='" + titularConta + '\'' +
-                ", clientes=" + clientes +
-                ", cartao=" + cartao +
+                ", cartaoList=" + cartaoList +
                 '}';
-    }
-
-    public void Depositar() {
-
-    }
-
-    public void Sacar() {
-
-    }
-
-    public void trasferirSaldo() {
-
     }
 
     public boolean isVerificaSaldo() {
         if (saldoConta > 0) {
-            JOptionPane.showMessageDialog(null, "Saldo disponível: " + saldoConta);
-        }else {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 }

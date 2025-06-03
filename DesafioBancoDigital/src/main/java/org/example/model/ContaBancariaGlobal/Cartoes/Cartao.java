@@ -1,8 +1,7 @@
 package org.example.model.ContaBancariaGlobal.Cartoes;
 
 import org.example.enums.TipoCartao;
-import org.example.model.Cliente.Clientes;
-import org.example.model.ContaBancariaGlobal.TiposContas.Conta;
+
 
 import java.util.List;
 import java.util.Objects;
@@ -10,9 +9,7 @@ import java.util.Objects;
 public class Cartao {
     private String codigoCV;
     private Integer limiteCartao;
-    Conta conta;
-    Clientes clientes;
-    List<TipoCartao> tipoCartaoList;
+    private List<TipoCartao> tipoCartaoList;
 
     public Cartao(String codigoCV, Integer limiteCartao) {
         super();
@@ -32,21 +29,6 @@ public class Cartao {
         this.codigoCV = codigoCV;
     }
 
-    public Conta getConta() {
-        return conta;
-    }
-
-    public void setConta(Conta conta) {
-        this.conta = conta;
-    }
-
-    public Clientes getClientes() {
-        return clientes;
-    }
-
-    public void setClientes(Clientes clientes) {
-        this.clientes = clientes;
-    }
 
     public List<TipoCartao> getTipoCartaoList() {
         return tipoCartaoList;
@@ -68,20 +50,18 @@ public class Cartao {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Cartao cartao = (Cartao) o;
-        return Objects.equals(codigoCV, cartao.codigoCV) && Objects.equals(conta, cartao.conta) && Objects.equals(clientes, cartao.clientes) && Objects.equals(tipoCartaoList, cartao.tipoCartaoList);
+        return Objects.equals(codigoCV, cartao.codigoCV) && Objects.equals(tipoCartaoList, cartao.tipoCartaoList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(codigoCV, conta, clientes, tipoCartaoList);
+        return Objects.hash(codigoCV, tipoCartaoList);
     }
 
     @Override
     public String toString() {
         return "Cartao{" +
                 "codigoCV='" + codigoCV + '\'' +
-                ", conta=" + conta +
-                ", clientes=" + clientes +
                 ", tipoCartaoList=" + tipoCartaoList +
                 '}';
     }

@@ -1,7 +1,6 @@
 package org.example.model.Pedido;
 
 import org.example.enums.TipoPagamento;
-import org.example.model.ContaBancariaGlobal.TiposContas.Conta;
 import org.example.model.ContaBancariaGlobal.TiposContas.ContaCorrente;
 
 public class PedidoCliente {
@@ -10,14 +9,14 @@ public class PedidoCliente {
     private TipoPagamento tipoPagamento;
     private ContaCorrente contaOrigem;
     private boolean aprovado;
-    private Conta conta;
 
-    public PedidoCliente(double valorCompra, TipoPagamento tipoPagamento, ContaCorrente contaOrigem, boolean aprovado, Conta conta) {
+
+    public PedidoCliente(double valorCompra, TipoPagamento tipoPagamento, ContaCorrente contaOrigem, boolean aprovado) {
         this.valorCompra = valorCompra;
         this.tipoPagamento = tipoPagamento;
         this.contaOrigem = contaOrigem;
         this.aprovado = aprovado;
-        this.conta = conta;
+
     }
 
     public PedidoCliente() {
@@ -55,13 +54,6 @@ public class PedidoCliente {
         this.aprovado = aprovado;
     }
 
-    public Conta getConta() {
-        return conta;
-    }
-
-    public void setConta(Conta conta) {
-        this.conta = conta;
-    }
 
     @Override
     public String toString() {
@@ -70,7 +62,6 @@ public class PedidoCliente {
                 ", tipoPagamento=" + tipoPagamento +
                 ", contaOrigem=" + contaOrigem +
                 ", aprovado=" + aprovado +
-                ", conta=" + conta +
                 '}';
     }
 }
