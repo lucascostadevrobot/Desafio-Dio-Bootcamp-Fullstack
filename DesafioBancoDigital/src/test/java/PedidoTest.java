@@ -24,9 +24,9 @@ public class PedidoTest {
 
 
     @Test
-    void verificaTipoPedido() {
+    void deveVerificaTipoDePedido() {
 
-        /*Verifica o tipo de Pagamento para o Pedido em questão*/
+        /*Verifica o tipo de Pagamento Debito*/
         {
 
             //Insntacia Conta Corrente...
@@ -45,8 +45,14 @@ public class PedidoTest {
             PedidoService pedidoService = new PedidoService();
             pedidoService.Processarpedido(pedidoCliente);
 
-            //Espero que seja 1 o resultado de conta corrente e cartão de débito...
+            //Espero que seja cartão de debito, compara com o tipo da conta corrente...
             Assertions.assertEquals(TipoPagamento.CARTAO_DEBITO, contaCorrente.getTipoPagamento());
+            //Espera que a conta tenha saldo 0, uma vez que o valor da compra foi 200
+            Assertions.assertEquals(0, pedidoCliente.getContaOrigem().getSaldoConta());
+        }
+
+        {
+
         }
 
     }
