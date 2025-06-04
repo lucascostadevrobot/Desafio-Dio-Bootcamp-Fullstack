@@ -1,11 +1,19 @@
 package org.example.model.ContaBancariaGlobal.TiposContas;
 
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
 public class Banco {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column
     private String nome;
+    @Column
     private String agencia;
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<Conta> contas;
 
     public Banco(String nome, String agencia) {

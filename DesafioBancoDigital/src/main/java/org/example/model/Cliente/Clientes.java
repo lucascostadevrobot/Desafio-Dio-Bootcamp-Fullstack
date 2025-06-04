@@ -3,14 +3,24 @@ package org.example.model.Cliente;
 import org.example.model.ContaBancariaGlobal.Cartoes.Cartao;
 import org.example.model.ContaBancariaGlobal.TiposContas.Conta;
 
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
 public class Clientes {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column
     private String nome;
+    @Column
     private String sobreNome;
+    @Column
     private String cpf;
+    @OneToOne(cascade = CascadeType.PERSIST)
     Conta conta;
+    @OneToMany(cascade = CascadeType.PERSIST)
     List<Cartao> cartao;
 
     public Clientes(String nome, String sobreNome, String cpf, Conta conta, List<Cartao> cartao) {

@@ -3,11 +3,23 @@ package org.example.model.Pedido;
 import org.example.enums.TipoPagamento;
 import org.example.model.ContaBancariaGlobal.TiposContas.ContaCorrente;
 
-public class PedidoCliente {
+import javax.persistence.*;
 
+@Entity
+public class PedidoCliente {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column
     private double valorCompra;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_pagamento")
     private TipoPagamento tipoPagamento;
+
+    @OneToOne
     private ContaCorrente contaOrigem;
+    @Column
     private boolean aprovado;
 
 

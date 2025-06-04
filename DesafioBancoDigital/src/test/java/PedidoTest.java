@@ -24,6 +24,7 @@ public class PedidoTest {
 
 
     @Test
+
     void deveVerificaTipoDePedido() {
 
         /**

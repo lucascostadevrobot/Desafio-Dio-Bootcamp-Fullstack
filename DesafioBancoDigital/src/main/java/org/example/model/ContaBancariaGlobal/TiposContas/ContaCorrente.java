@@ -3,19 +3,28 @@ package org.example.model.ContaBancariaGlobal.TiposContas;
 import org.example.enums.TipoPagamento;
 import org.example.model.ContaBancariaGlobal.Cartoes.Cartao;
 
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
-
+@Entity
 public class ContaCorrente extends Conta {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Enumerated(EnumType.STRING)
     private TipoPagamento tipoPagamento;
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<Cartao> cartaos;
 
     public ContaCorrente(TipoPagamento tipoPagamento, List<Cartao> cartaos) {
         super();
         this.tipoPagamento = tipoPagamento;
         this.cartaos = cartaos;
+    }
+
+    public ContaCorrente() {
     }
 
 

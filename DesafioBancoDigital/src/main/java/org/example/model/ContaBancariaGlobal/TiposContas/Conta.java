@@ -2,13 +2,22 @@ package org.example.model.ContaBancariaGlobal.TiposContas;
 
 import org.example.model.ContaBancariaGlobal.Cartoes.Cartao;
 
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
 public class Conta extends Banco {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column
     private Integer numeroConta;
+    @Column
     private Integer saldoConta;
+    @Column
     private String titularConta;
+    @OneToMany(cascade = CascadeType.PERSIST)
     List<Cartao> cartaoList;
 
     public Conta(Integer numeroConta, Integer saldoConta, String titularConta, List<Cartao> cartaoList) {

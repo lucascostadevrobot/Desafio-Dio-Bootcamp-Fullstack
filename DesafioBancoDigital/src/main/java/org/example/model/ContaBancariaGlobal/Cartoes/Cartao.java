@@ -3,12 +3,24 @@ package org.example.model.ContaBancariaGlobal.Cartoes;
 import org.example.enums.TipoCartao;
 
 
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
 public class Cartao {
+    @Id
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    private Integer id;
+    @Column
     private String codigoCV;
+    @Column
     private Integer limiteCartao;
+
+    @ElementCollection(targetClass = TipoCartao.class)
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "cartao_tipo_cartao", joinColumns = @JoinColumn(name = "cartao_id"))
+    @Column(name = "tipo_cartao")
     private List<TipoCartao> tipoCartaoList;
 
     public Cartao(String codigoCV, Integer limiteCartao) {
